@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **Problem Statement :**
 - ### `To extract  the registration number of a car entering inside a parking lot.`
 
@@ -82,3 +83,6 @@ We have displayed a test run on a car image shown below.
     - Catching speeders by comparing the average time it takes to get from stationary camera A to stationary camera B.
     - Determining what cars do and do not belong in a parking garage.
     - Expediting parking by eliminating the need for human confirmation of parking passes.
+=======
+# Temp-Proj
+>>>>>>> 71ae447e1e7f0de3b43a63d8c2c2deded5aafc1a

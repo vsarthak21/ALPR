@@ -14,7 +14,7 @@ import Main
 from PIL import Image
 import Preprocess
 import PossibleChar
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from keras.models import load_model
 from keras.optimizers import RMSprop
 
@@ -46,7 +46,7 @@ RESIZED_CHAR_IMAGE_WIDTH = 64
 RESIZED_CHAR_IMAGE_HEIGHT = 64
 
 MIN_CONTOUR_AREA = 100
-model = load_model('New_model/char-reg.h5')
+model = load_model('/home/sarthak/Desktop/ALPR/MainProgram/New_model/char-reg.h5')
 ###################################################################################################
 def loadCNNClassifier():
     model.compile(optimizer = RMSprop(lr=0.001,rho=0.9,epsilon=1e-08,decay=0.005), loss = 'categorical_crossentropy', metrics = ['accuracy'])

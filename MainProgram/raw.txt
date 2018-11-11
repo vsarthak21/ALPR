@@ -1,0 +1,10 @@
+config = {
+    apiKey: "AIzaSyCAxWkvFUGnQ69_s3s9iNH90VSnRDo6Efo",
+    authDomain: "vision-5334f.firebaseapp.com",
+    databaseURL: "https://vision-5334f.firebaseio.com",
+    projectId: "vision-5334f",
+    storageBucket: "vision-5334f.appspot.com",
+    messagingSenderId: "45558056742"
+  };
+
+  

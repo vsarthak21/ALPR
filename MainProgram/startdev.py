@@ -7,26 +7,13 @@ import Main
 import cv2
 from PIL import Image
 import pymongo
-
-# These are the parameters to set the naming of the database.
-host = 'localhost'
-database = 'ALPR'
-collection = 'videosTest'
-    
+import pickle
 
 
-def mongo_connection():
-    con = pymongo.MongoClient(host)
-    col = con[database][collection]
-    if col.count()==0:
-        con[database].create_collection(collection)
-    return col
-
-
-if __name__ == '__main__':
-    name = str(input('Enter the name of the video: '))
-    (vdolength,totalFrames) = videosplit.Launch(name)
-	# The name of the folder to store the frames of the video
+def test(name):
+    (vdolength, totalFrames) = videosplit.Launch(name)
+    print(vdolength, totalFrames)
+    # The name of the folder to store the frames of the video
     os.chdir('data')
 
     result = {}
@@ -46,7 +33,8 @@ if __name__ == '__main__':
     # Sort the list of number plates by the frequency of their occurance
     l = {x: y for y, x in result.items()}
     r = list(sorted(l.keys()))
-    index = r[len(r) - 1]
+    print(l, r)
+    index = r[len(r)-1]
     plate = l[index]
     img = result_imag[plate]
     executionTime = "{0:.2f}".format(endTime - startTime)
@@ -56,32 +44,37 @@ if __name__ == '__main__':
     except:
         print("Problem in displaying license plate")
     print('execution time is : ' + executionTime)
-    
+
     os.chdir('..')
     licensePlatePath = './LicensePlates/'+name.split('.')[0]+'.jpg'
     try:
-        cv2.imwrite(licensePlatePath,img)
+        cv2.imwrite(licensePlatePath, img)
     except:
         print("Problem in writing license plate image")
-        
+
     # If u want to see the freqiencies for predictions then uncomment the below 2 lines.
     """
     for i in result.keys():
         print(i, ' : ', result[i])
     """
     # Store the result into mongodb
-    try:
-        col = mongo_connection()
-        dict = {}
-        dict['date and time'] = time.ctime()
-        dict['video'] = name
-        dict['video length'] = vdolength
-        dict['image'] = plate
-        dict['Total Frames in video'] = totalFrames
-        dict['execution_time'] = executionTime
-        dict['frequency ratio'] = "{0:.2f}".format(result[plate] / len(result))
-        
-        col.insert(dict)
-    except Exception as e:
-        print(e)
-    
+    # try:
+    #     col = mongo_connection()
+    #     dict = {}
+    #     dict['date and time'] = time.ctime()
+    #     dict['video'] = name
+    #     dict['video length'] = vdolength
+    #     dict['image'] = plate
+    #     dict['Total Frames in video'] = totalFrames
+    #     dict['execution_time'] = executionTime
+    #     dict['frequency ratio'] = "{0:.2f}".format(result[plate] / len(result))
+
+    #     col.insert(dict)
+    # except Exception as e:
+    #     print(e)
+    return plate
+
+# name = str(input('Enter the name of the video: '))
+# test(name)
+# filename = 'final_model.pkl'
+# pickle.dump(test, open(filename, 'wb'))

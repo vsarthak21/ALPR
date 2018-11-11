@@ -5,7 +5,7 @@ import numpy as np
 import math
 import Main
 import random
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import Preprocess
 import DetectChars
 from PIL import Image
